@@ -6,6 +6,20 @@
 
     <%= render @workspace %>
 
+    <h3>Documents</h3>
+
+    <% if @workspace.documents.empty? %>
+      <p>No documents yet.</p>
+    <% else %>
+      <ul>
+        <% @workspace.documents.each do |document| %>
+          <li><%= link_to document.title, [@workspace, document] %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= link_to 'Crear nuevo documento', new_workspace_document_path(workspace_id: @workspace.id), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
     <%= link_to 'Edit this workspace', edit_workspace_path(@workspace), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
       <%= button_to 'Destroy this workspace', workspace_path(@workspace), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>

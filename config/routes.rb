@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   # Defines the root path route ("/")
   root "workspaces#index"
-  resources :workspaces
-  resources :users
+  resources :workspaces do
+    resources :documents, only: [:show, :new, :create, :edit, :update, :destroy]
+  end
 end
