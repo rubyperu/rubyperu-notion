@@ -33,7 +33,7 @@ class DocumentsController < ApplicationController
   def update
     respond_to do |format|
       if @document.update(document_params)
-        format.html { redirect_to @document.workspace, notice: "El documento ha sido actualizado." }
+        format.html { redirect_to [@document.workspace, @document], notice: "El documento ha sido actualizado." }
         format.json { render :show, status: :ok, location: @document }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class DocumentsController < ApplicationController
     @document.destroy
 
     respond_to do |format|
-      format.html { redirect_to workspace_documents_path(workspace_id: params[:workspace_id]), notice: "El documento ha sido eliminado." }
+      format.html { redirect_to @document.workspace, notice: "El documento ha sido eliminado." }
       format.json { head :no_content }
     end
   end
