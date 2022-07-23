@@ -13,7 +13,13 @@
 
   <body class="container mx-auto">
     <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <p class="bg-red-200 text-red-900"><%= alert %></p>
+    <% if user_signed_in? %>
+      <%= current_user.email %> 
+      <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
