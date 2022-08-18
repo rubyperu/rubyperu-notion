@@ -18,6 +18,27 @@
       </ul>
     <% end %>
 
+    <b>Owner:</b> <%= @workspace.owner.email %>
+
+    <ul>
+      Usuarios que tienen acceso a este espacio:
+      <% @workspace.users.each do |user| %>
+        <li><%= user.email %></li>
+      <% end %>
+    </ul>
+
+    <%= form_with(url: workspace_share_path(@workspace)) do |form| %>
+      <div class="my-5">
+        <%= form.label :email %>
+        <%= form.text_field :email, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <div class="inline">
+        <%= form.submit 'Dar acceso', class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      </div>
+    <% end %>
+
+
     <%= link_to 'Crear nuevo documento', new_workspace_document_path(workspace_id: @workspace.id), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 
     <%= link_to 'Edit this workspace', edit_workspace_path(@workspace), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>

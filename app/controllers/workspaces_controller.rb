@@ -1,5 +1,5 @@
 class WorkspacesController < ApplicationController
-  before_action :set_workspace, only: %i[ show edit update destroy ]
+  before_action :set_workspace, only: %i[ show edit update destroy share]
 
   # GET /workspaces or /workspaces.json
   def index
@@ -57,10 +57,19 @@ class WorkspacesController < ApplicationController
     end
   end
 
+  # POST /workspaces/1/share
+  def share
+    new_user = User.find_by(email: params[:email])
+    @workspace.give_access(new_user)
+    respond_to do |format|
+      format.html { redirect_to @workspace, notice: "Se compartió" }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_workspace
-      @workspace = Workspace.find(params[:id])
+      @workspace = Workspace.find(params[:id] || params[:workspace_id])
     end
 
     # Only allow a list of trusted parameters through.

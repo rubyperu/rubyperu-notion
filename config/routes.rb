@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   root "workspaces#index"
   resources :workspaces do
     resources :documents, only: [:show, :new, :create, :edit, :update, :destroy]
+    post :share
   end
 end
