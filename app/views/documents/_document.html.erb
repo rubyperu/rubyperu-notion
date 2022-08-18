@@ -1,4 +1,7 @@
 <div id="<%= dom_id document %>">
+  <!-- TODO: Add helper to generate tags -->
+  <p><%= document.public ? 'Público' : 'Privado' %></p>
+
   <p class="my-5">
     <strong class="block font-medium mb-1">Título:</strong>
     <%= document.title %>
