@@ -73,7 +73,9 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "faker", "~> 2.22"
-  gem "factory_bot"
+  gem "factory_bot_rails"
+
+  # gem 'simplecov'
 end
 
 gem "devise", "~> 4.8"
