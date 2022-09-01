@@ -1,9 +1,12 @@
 require "test_helper"
 
 class WorkspacesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
-    user = users(:one)
-    @workspace = workspaces(:one, owner: user)
+    user = create(:user)
+    @workspace = create(:workspace, owner: user)
+    sign_in user
   end
 
   test "should get index" do
