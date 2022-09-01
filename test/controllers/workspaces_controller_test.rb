@@ -2,7 +2,8 @@ require "test_helper"
 
 class WorkspacesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @workspace = workspaces(:one)
+    user = users(:one)
+    @workspace = workspaces(:one, owner: user)
   end
 
   test "should get index" do

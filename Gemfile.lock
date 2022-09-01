@@ -96,6 +96,10 @@ GEM
       warden (~> 1.2.3)
     digest (3.1.0)
     erubi (1.10.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    faker (2.22.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -246,6 +250,8 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.8)
+  factory_bot
+  faker (~> 2.22)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
