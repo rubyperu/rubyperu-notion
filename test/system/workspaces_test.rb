@@ -1,8 +1,12 @@
 require "application_system_test_case"
 
 class WorkspacesTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
-    @workspace = workspaces(:one)
+    user = create(:user)
+    @workspace = create(:workspace, owner: user)
+    sign_in user
   end
 
   test "visiting the index" do
@@ -37,5 +41,16 @@ class WorkspacesTest < ApplicationSystemTestCase
     click_on "Destroy this workspace", match: :first
 
     assert_text "Workspace was successfully destroyed"
+  end
+
+  test "should give access to another user" do
+    visit workspace_url(@workspace)
+    
+    guest_user = create(:user)
+    fill_in "Email", with: guest_user.email
+    click_on "Dar acceso"
+
+    assert_text "Se compartió"
+    assert_text guest_user.email
   end
 end
