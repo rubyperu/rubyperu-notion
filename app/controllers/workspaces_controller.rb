@@ -60,9 +60,16 @@ class WorkspacesController < ApplicationController
   # POST /workspaces/1/share
   def share
     new_user = User.find_by(email: params[:email])
-    @workspace.give_access(new_user)
+
+    if new_user
+      @workspace.give_access(new_user)
+      flash[:notice] = "Se compartió"
+    else
+      flash[:alert] = "No se encontró el usuario"
+    end
+
     respond_to do |format|
-      format.html { redirect_to @workspace, notice: "Se compartió" }
+      format.html { redirect_to @workspace }
     end
   end
 
