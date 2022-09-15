@@ -53,4 +53,15 @@ class WorkspacesTest < ApplicationSystemTestCase
     assert_text "Se compartió"
     assert_text guest_user.email
   end
+
+  test "no da acceso a un mail que no existe" do
+    visit workspace_url(@workspace)
+
+    unknown_email = build(:user).email
+    fill_in "Email", with: unknown_email
+    click_on "Dar acceso"
+
+    assert_text "No se encontró el usuario"
+    assert_no_text unknown_email
+  end
 end
